@@ -1,0 +1,67 @@
+.app-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+.app-info{
+    color: #95a7b8;
+}
+
+.app-start {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.auth {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.signup{
+    background-color: #7f9fbd;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.signup:hover{
+    background-color: white;
+    cursor: pointer;
+    color: bfe2e3;
+
+    border: 1px solid gray
+}
+.login{
+    background-color: #7f9fbd;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+.login:hover{
+    background-color: white;
+    cursor: pointer;
+    color: #bfe2e3;
+    border: 1px solid gray;
+}
+
+
+
+/* 
+    #bfe2e3 	(191,226,227)
+	#b4d2d8 	(180,210,216)
+	#95a7b8 	(149,167,184)
+	#7f9fbd 	(127,159,189)
+	#69869c 	(105,134,156)
+*/
