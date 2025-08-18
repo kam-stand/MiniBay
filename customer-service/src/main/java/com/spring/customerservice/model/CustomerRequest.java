@@ -13,9 +13,10 @@ public class CustomerRequest {
     private String username;
     private String password;
 
-    public CustomerRequest(String email, String phoneNumber, String username) {
+    public CustomerRequest(String email, String phoneNumber, String username, String password) {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.username = username;
+        this.password = password;
     }
 }

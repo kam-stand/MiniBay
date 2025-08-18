@@ -21,21 +21,21 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public CustomerRequest getById(Long id) {
+    public CustomerResponse getById(Long id) {
         Customer customer = customerRepository.findById(id).orElse(null);
         if (customer == null) {
             return null;
         }
-        return  new CustomerRequest(customer.getEmail(), customer.getPhoneNumber(), customer.getUsername());
+        return  new CustomerResponse(customer.getId(), customer.getEmail(), customer.getUsername());
     }
 
-    public List<CustomerRequest> getAll() {
+    public List<CustomerResponse> getAll() {
 
         return customerRepository.findAll()
                 .stream()
-                .map(customer -> new CustomerRequest(
+                .map(customer -> new CustomerResponse(
+                        customer.getId(),
                         customer.getEmail(),
-                        customer.getPhoneNumber(),
                         customer.getUsername()
                 ))
                 .toList();
