@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../auth/auth-service';
 
-interface login {
+interface customerLogin {
   username:string;
   password:string;
 }
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -15,16 +17,29 @@ interface login {
 export class Login {
 
 
-  loginRequest: login = {
+  loginRequest: customerLogin = {
     username: '',
     password: ''
   }
+
+  constructor (private authService: AuthService) {}
 
   submitLogin(event:Event) {
     event.preventDefault();
     console.log('Form submitted')
     console.log('Password: ' + this.loginRequest.password);
-    console.log('Username ' + this.loginRequest.username);
+    console.log('Username: ' + this.loginRequest.username);
+    console.log('LoginRequest object: ' + this.loginRequest);
+    this.authService.loginUser(this.loginRequest).subscribe({
+    next: (response) => {
+      console.log("Login success:", response);
+      this.authService.saveUser(response);
+    },
+    error: (err) => {
+      console.error("Login failed:", err);
+      alert("Invalid credentials!");
+    }
+  });
   }
 
 }

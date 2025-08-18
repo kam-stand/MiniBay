@@ -1,6 +1,7 @@
 package com.spring.customerservice.controller;
 
-import com.spring.customerservice.model.CustomerDTO;
+import com.spring.customerservice.model.CustomerLogin;
+import com.spring.customerservice.model.CustomerRequest;
 import com.spring.customerservice.service.CustomerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,12 +34,12 @@ public class CustomerController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody CustomerDTO customerDTO){
-        return ResponseEntity.ok(customerService.loginUser(customerDTO));
+    public ResponseEntity<?> loginUser(@RequestBody CustomerLogin customerLogin){
+        return ResponseEntity.ok(customerService.loginUser(customerLogin));
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<?> registerUser(@RequestBody  CustomerDTO customerDTO){
-        return ResponseEntity.ok(customerService.registerUser(customerDTO));
+    public ResponseEntity<?> registerUser(@RequestBody CustomerRequest customerRequest){
+        return ResponseEntity.ok(customerService.registerUser(customerRequest));
     }
 }

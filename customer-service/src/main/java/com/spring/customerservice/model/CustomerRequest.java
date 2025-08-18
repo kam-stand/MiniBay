@@ -6,14 +6,14 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CustomerDTO {
+public class CustomerRequest {
 
     private String email;
     private String phoneNumber;
     private String username;
     private String password;
 
-    public CustomerDTO(String email, String phoneNumber, String username) {
+    public CustomerRequest(String email, String phoneNumber, String username) {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.username = username;

@@ -1,7 +1,8 @@
 package com.spring.customerservice.service;
 
 import com.spring.customerservice.model.Customer;
-import com.spring.customerservice.model.CustomerDTO;
+import com.spring.customerservice.model.CustomerLogin;
+import com.spring.customerservice.model.CustomerRequest;
 import com.spring.customerservice.model.CustomerResponse;
 import com.spring.customerservice.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
@@ -20,19 +21,19 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public CustomerDTO getById(Long id) {
+    public CustomerRequest getById(Long id) {
         Customer customer = customerRepository.findById(id).orElse(null);
         if (customer == null) {
             return null;
         }
-        return  new CustomerDTO(customer.getEmail(), customer.getPhoneNumber(), customer.getUsername());
+        return  new CustomerRequest(customer.getEmail(), customer.getPhoneNumber(), customer.getUsername());
     }
 
-    public List<CustomerDTO> getAll() {
+    public List<CustomerRequest> getAll() {
 
         return customerRepository.findAll()
                 .stream()
-                .map(customer -> new CustomerDTO(
+                .map(customer -> new CustomerRequest(
                         customer.getEmail(),
                         customer.getPhoneNumber(),
                         customer.getUsername()
@@ -40,10 +41,10 @@ public class CustomerService {
                 .toList();
     }
 
-    public CustomerResponse loginUser(CustomerDTO customerDTO) {
+    public CustomerResponse loginUser(CustomerLogin customerLogin) {
         List<Customer> customers = customerRepository.findAll();
         for (Customer customer : customers) {
-            if (customer.getEmail().equals(customerDTO.getEmail()) && customer.getPassword().equals(customerDTO.getPassword())) {
+            if (customer.getUsername().equals(customerLogin.username()) && customer.getPassword().equals(customerLogin.password())) {
                 CustomerResponse customerResponse = new CustomerResponse();
                 customerResponse.setId(customer.getId());
                 customerResponse.setEmail(customer.getEmail());
@@ -54,18 +55,18 @@ public class CustomerService {
         return null;
     }
 
-    public CustomerResponse registerUser(CustomerDTO customerDTO) {
+    public CustomerResponse registerUser(CustomerRequest customerRequest) {
         List<Customer> customers = customerRepository.findAll();
         for (Customer customer: customers) {
-            if (customer.getEmail().equals(customerDTO.getEmail()) || customer.getUsername().equals(customerDTO.getUsername())) {
+            if (customer.getEmail().equals(customerRequest.getEmail()) || customer.getUsername().equals(customerRequest.getUsername())) {
                 return null;
             }
         }
         Customer customer = new Customer();
-        customer.setEmail(customerDTO.getEmail());
-        customer.setUsername(customerDTO.getUsername());
-        customer.setPassword(customerDTO.getPassword());
-        customer.setPhoneNumber(customerDTO.getPhoneNumber());
+        customer.setEmail(customerRequest.getEmail());
+        customer.setUsername(customerRequest.getUsername());
+        customer.setPassword(customerRequest.getPassword());
+        customer.setPhoneNumber(customerRequest.getPhoneNumber());
         save(customer);
         CustomerResponse customerResponse = new CustomerResponse();
         customerResponse.setId(customer.getId());
