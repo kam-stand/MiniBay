@@ -25,6 +25,51 @@ services:
     restart: always
     depends_on:
       - config-server
+  api-gateway:
+    container_name: api-gateway
+    image: api-gateway:v2
+    build:
+      context: api-gateway
+      dockerfile: Dockerfile
+    networks:
+      - minibay-network
+    ports:
+      - "8060:8060"
+    restart: always
+    depends_on:
+      - config-server
+      - eureka-server
+  mysql-customer:
+    container_name: mysql-customer
+    image: mysql:8.0.43-debian
+    environment:
+    - MYSQL_ROOT_PASSWORD=password
+    - MYSQL_USER=user
+    - MYSQL_DATABASE=customerdb
+    - MYSQL_PASSWORD=password
+    ports:
+      - "3305:3306"
+    networks:
+      - minibay-network
+    restart: always
+  customer-service:
+    container_name: customer-service
+    image: customer-service:v2
+    build:
+      context: customer-service
+      dockerfile: Dockerfile
+    networks:
+      - minibay-network
+    ports:
+      - "8040:8040"
+    restart: always
+    depends_on:
+      - config-server
+      - eureka-server
+      - mysql-customer
+
+
+
 networks:
   minibay-network:
     driver: bridge
