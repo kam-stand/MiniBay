@@ -1,0 +1,121 @@
+/* Color palette:
+   #bfe2e3  (lightest)
+   #b4d2d8
+   #95a7b8
+   #7f9fbd
+   #69869c  (darkest)
+*/
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: #69869c;
+}
+
+.login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 10px;
+    margin: 10px;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.info {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+.info-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+}
+.info-user label{
+    margin-bottom: 15px;
+    color: #69869c;
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+
+}
+
+.info-pass {
+
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+}
+
+.info-pass label {
+     margin-bottom: 15px;
+    color: #69869c;
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+}
+
+.info-btn {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+}
+
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #95a7b8;
+    background-color: #bfe2e3;
+}
+
+
+.login-form button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #7f9fbd;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.login-form button:hover {
+    background-color: #69869c;
+    transform: translateY(-2px);
+}
+
+.login-form button:active {
+    transform: translateY(0);
+}

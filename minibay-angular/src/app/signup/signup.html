@@ -1,1 +1,58 @@
-<p>signup works!</p>
+<div class="login-container">
+    <div class="header">
+        <h1>Signup</h1>
+        <div>
+            <p>Register with information below</p>
+        </div>
+    </div>
+    <div class="login-form">
+        <form (submit)="submitLogin($event)">
+            <div class="info">
+
+
+                <div class="info-user">
+                    <label for="username"><b>Username</b></label>
+
+                    <input type="text" placeholder="Enter Username" name="username" required
+                        [(ngModel)]="signupRequest.username">
+
+
+                </div>
+
+
+                <div class="info-user">
+                    <label for="email"><b>Email</b></label>
+
+                    <input type="text" placeholder="Enter email" name="email" required
+                        [(ngModel)]="signupRequest.email">
+
+                </div>
+
+
+                <div class="info-user">
+                    <label for="email"><b>Phone Number</b></label>
+
+                    <input type="text" placeholder="Phone Number" name="phone" required
+                        [(ngModel)]="signupRequest.phonenumer">
+
+                </div>
+
+
+                <div class="info-pass">
+                    <label for="password"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password" required
+                        [(ngModel)]="signupRequest.password">
+
+                </div>
+
+
+                <div class="info-btn">
+
+                    <button type="submit">Signup</button>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
