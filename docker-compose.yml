@@ -67,6 +67,33 @@ services:
       - config-server
       - eureka-server
       - mysql-customer
+  mongodb:
+    container_name: mongodb
+    image: mongo:6.0
+    environment:
+    - MONGO_INITDB_ROOT_USERNAME=root
+    - MONGO_INITDB_ROOT_PASSWORD=password
+    - MONGO_INITDB_DATABASE=productdb
+    ports:
+      - "27017:27017"
+    networks:
+      - minibay-network
+    restart: always
+  product-service:
+    container_name: product-service
+    image: product-service:v2
+    build:
+      context: product-service
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8020:8020"
+    networks:
+      - minibay-network
+    depends_on:
+      - config-server
+      - eureka-server
+      - mongodb
 
 
 
