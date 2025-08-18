@@ -12,4 +12,12 @@ public class CustomerDTO {
     private String phoneNumber;
     private String username;
     private String password;
+
+
+    public CustomerDTO(String email, String phoneNumber, String username) {
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.username = username;
+        this.password = password;
+    }
 }

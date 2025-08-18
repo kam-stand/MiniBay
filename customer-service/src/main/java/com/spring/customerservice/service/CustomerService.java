@@ -20,12 +20,24 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public Customer getById(Long id) {
-        return customerRepository.findById(id).orElse(null);
+    public CustomerDTO getById(Long id) {
+        Customer customer = customerRepository.findById(id).orElse(null);
+        if (customer == null) {
+            return null;
+        }
+        return  new CustomerDTO(customer.getEmail(), customer.getPhoneNumber(), customer.getUsername());
     }
 
-    public List<Customer> getAll() {
-        return customerRepository.findAll();
+    public List<CustomerDTO> getAll() {
+
+        return customerRepository.findAll()
+                .stream()
+                .map(customer -> new CustomerDTO(
+                        customer.getEmail(),
+                        customer.getPhoneNumber(),
+                        customer.getUsername()
+                ))
+                .toList();
     }
 
     public CustomerResponse loginUser(CustomerDTO customerDTO) {

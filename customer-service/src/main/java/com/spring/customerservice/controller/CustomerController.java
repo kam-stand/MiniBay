@@ -16,9 +16,20 @@ public class CustomerController {
     }
 
 
-    @GetMapping("")
+    @GetMapping("/index")
     public String home() {
         return "Hello World, from customer service";
+    }
+
+
+    @GetMapping("")
+    public ResponseEntity<?> getAll(){
+        return ResponseEntity.ok(customerService.getAll());
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id){
+        return ResponseEntity.ok(customerService.getById(id));
     }
 
     @PostMapping("/login")
