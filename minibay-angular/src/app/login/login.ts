@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth/auth-service';
-
+import { Router } from '@angular/router';
 interface customerLogin {
   username:string;
   password:string;
@@ -22,7 +22,7 @@ export class Login {
     password: ''
   }
 
-  constructor (private authService: AuthService) {}
+  constructor (private authService: AuthService, private router: Router) {}
 
   submitLogin(event:Event) {
     event.preventDefault();
@@ -34,12 +34,16 @@ export class Login {
     next: (response) => {
       console.log("Login success:", response);
       this.authService.saveUser(response);
+      this.router.navigate(['/home'])
+      
+      
     },
     error: (err) => {
       console.error("Login failed:", err);
       alert("Invalid credentials!");
     }
   });
+
   }
 
 }

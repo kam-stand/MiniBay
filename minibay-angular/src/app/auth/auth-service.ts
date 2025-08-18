@@ -8,6 +8,13 @@ interface customerLogin {
   password:string;
 }
 
+interface customerRequest {
+  email: string;
+  phoneNumber: string;
+  username:string;
+  password:string
+}
+
 interface customerResponse {
 
   Id: number;
@@ -30,6 +37,14 @@ export class AuthService {
     console.log("Sending body: " + loginRequest);
     const LOGIN_URL = `${this.API_URL}/customers/login`;
     return this.http.post<customerResponse>(LOGIN_URL, loginRequest);
+  }
+
+  registerUser(signupRequest: customerRequest) : Observable<customerResponse> {
+    console.log("Making request to: " + this.API_URL);
+    console.log("Sending body: " + signupRequest);
+    const SIGNUP_URL = `${this.API_URL}/customers/signin`;
+    return this.http.post<customerResponse>(SIGNUP_URL, signupRequest);
+    
   }
 
 
