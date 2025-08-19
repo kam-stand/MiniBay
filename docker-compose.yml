@@ -2,6 +2,19 @@ version: "3.9"
 
 
 services:
+  mysql-customer:
+    container_name: mysql-customer
+    image: mysql:8.0.43-debian
+    environment:
+    - MYSQL_ROOT_PASSWORD=password
+    - MYSQL_USER=user
+    - MYSQL_DATABASE=customerdb
+    - MYSQL_PASSWORD=password
+    ports:
+      - "3305:3306"
+    networks:
+      - minibay-network
+    restart: always
   config-server:
     container_name: config-server
     image: config-server:v2
@@ -39,19 +52,7 @@ services:
     depends_on:
       - config-server
       - eureka-server
-  mysql-customer:
-    container_name: mysql-customer
-    image: mysql:8.0.43-debian
-    environment:
-    - MYSQL_ROOT_PASSWORD=password
-    - MYSQL_USER=user
-    - MYSQL_DATABASE=customerdb
-    - MYSQL_PASSWORD=password
-    ports:
-      - "3305:3306"
-    networks:
-      - minibay-network
-    restart: always
+
   customer-service:
     container_name: customer-service
     image: customer-service:v2
@@ -79,6 +80,8 @@ services:
     networks:
       - minibay-network
     restart: always
+    volumes:
+      - ./mongo-init/init.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
   product-service:
     container_name: product-service
     image: product-service:v2

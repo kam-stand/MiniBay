@@ -2,7 +2,6 @@ package com.spring.productservice.controller;
 
 import com.spring.productservice.model.Product;
 import com.spring.productservice.service.ProductService;
-import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
