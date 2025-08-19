@@ -1,1 +1,68 @@
-<p>home works!</p>
+<app-navbar></app-navbar>
+
+<div class="home-container">
+  <div class="sell" (click)="handleView('sell')">
+    <mat-icon class="icon">sell</mat-icon>
+    <h1>Sell</h1>
+  </div>
+
+  <div class="bid" (click)="handleView('bid')">
+    <mat-icon class="icon">gavel</mat-icon>
+    <h1>Bids</h1>
+  </div>
+
+  <div class="trend" (click)="handleView('trend')">
+    <mat-icon class="icon">moving</mat-icon>
+    <h1>Trending</h1>
+  </div>
+
+</div>
+
+
+@switch (view) {
+
+@case ("bid") {
+<h1>bid view</h1>
+
+}
+
+@case ("trend") {
+<h1>trend view</h1>
+}
+
+@case ("sell") {
+<div class="sell-container">
+  <form (submit)="submitProduct($event)">
+    <div class="product-field">
+      <label for="fname">Name</label><br>
+      <input type="text" id="fname" name="fname" [(ngModel)]="product.name" placeholder="Smart Watch"><br>
+    </div>
+
+    <div class="product-field">
+      <label for="lname">Brand</label><br>
+      <input type="text" id="lname" name="lname" [(ngModel)]="product.brand" placeholder="Apple"><br>
+    </div>
+
+        <div class="product-field">
+      <label for="categories">Categories (separate by spaces)</label><br>
+      <input type="text" id="categories" name="categories" [(ngModel)]="categoriesText" placeholder="e.g. Tech"><br>
+    </div>
+
+
+    <div class="product-field">
+      <label for="price">Price</label><br>
+      <input type="number" id="price" name="price" min="0.01" step="0.01" [(ngModel)]="product.price" placeholder="0.00"><br>
+    </div>
+
+    <div>
+      <button>create</button>
+    </div>
+
+  </form>
+</div>
+}
+
+@default {
+<p>nothing to see here</p>
+}
+}

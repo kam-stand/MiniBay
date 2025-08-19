@@ -1,0 +1,79 @@
+
+.home-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+.home-container div {
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    
+}
+
+h1 {
+  color: transparent;
+}
+
+
+
+/* Color palette:
+   #bfe2e3  (lightest)
+   #b4d2d8
+   #95a7b8
+   #7f9fbd
+   #69869c  (darkest)
+*/
+
+.home-container div:hover {
+    background-color: #b4d2d8;
+    border: 1px solid white;
+    border-radius: 15px;
+    h1 {
+        color: white;
+    }
+    cursor: pointer;
+}
+
+
+.icon {
+  color: #7f9fbd ;
+  margin: 10px;
+  font-size: 48px;   /* make it bigger */
+  height: 48px;      /* optional, for alignment */
+  width: 48px;
+}
+
+.sell-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.sell-container div {
+  margin: 10px;
+  padding: 10px;
+
+}
+
+label {
+     margin-bottom: 15px;
+    color: #69869c;
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+}
+
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #95a7b8;
+    background-color: #bfe2e3;
+}

@@ -16,6 +16,8 @@ public class Product {
     @Id
     private String id;             // MongoDB ObjectId as String
 
+    private int userId;
+
     private String name;           // Product name
 
     private String brand;          // Brand name
