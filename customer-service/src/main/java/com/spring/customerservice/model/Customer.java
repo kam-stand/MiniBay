@@ -27,4 +27,12 @@ public class Customer {
     @Column(nullable = false)
     String password;
 
+
+    public Customer(String email, String phoneNumber, String username, String password) {
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.username = username;
+        this.password = password;
+    }
+
 }
