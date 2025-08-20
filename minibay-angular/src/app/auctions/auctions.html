@@ -1,79 +1,133 @@
 <div class="auction-container">
-    <div class="auction-list">
-        @for (auction of auctionList; track auction) {
-        <div class="auction-info">
-            <!-- <div>
+  <div class="auction-list">
+    @for (auction of auctionList; track auction.id) {
+    <div class="auction-info">
+      <!-- <div>
         <h1>{{ auction.id }}</h1>
       </div> -->
-            <div>
-                <mat-icon>badge</mat-icon>
-                {{ auction.product.name }}
-            </div>
-            <div>
-                <mat-icon>source</mat-icon>
-                {{ auction.product.brand }}
-            </div>
-            <div>
-                <mat-icon>bolt</mat-icon>
-                Max bid: {{ auction.currentBid }}
-            </div>
-            <div>
-                <mat-icon>paid</mat-icon>
-                Product price: {{auction.product.price}}
-            </div>
+      <div>
+        <mat-icon>badge</mat-icon>
+        {{ auction.product.name }}
+      </div>
+      <div>
+        <mat-icon>source</mat-icon>
+        {{ auction.product.brand }}
+      </div>
+      <div>
+        <mat-icon>bolt</mat-icon>
+        Max bid: {{ auction.currentBid }}
+      </div>
+      <div>
+        <mat-icon>paid</mat-icon>
+        Product price: {{ auction.product.price }}
+      </div>
 
-            <div class="bid" (click)="handleView('bid', auction.id)">
-                <mat-icon>hail</mat-icon>
-                Bids: {{ auction.bids.length }}
-            </div>
-            <div class="comment" (click)="handleView('comment',auction.id)">
-                <mat-icon>comment</mat-icon>
-                Comments: {{ auction.comments.length }}
-            </div>
-            <div class="category">
-                <mat-icon>style</mat-icon>
-                @if (auction.product.categories.length > 0) {
-                <ul>
-                    @for (category of auction.product.categories; track $index) {
-                    <li>{{ category }}</li>
-                    }
-                </ul>
-                }
-            </div>
-        </div>
+      <div class="bid" (click)="handleView('bid', auction.id)">
+        <mat-icon>hail</mat-icon>
+        Bids: {{ auction.bids.length }}
+      </div>
+      <div class="comment" (click)="handleView('comment', auction.id)">
+        <mat-icon>comment</mat-icon>
+        Comments: {{ auction.comments.length }}
+      </div>
+      <div class="category">
+        <mat-icon>style</mat-icon>
+        @if (auction.product.categories.length > 0) {
+        <ul>
+          @for (category of auction.product.categories; track $index) {
+          <li>{{ category }}</li>
+          }
+        </ul>
         }
+      </div>
+    </div>
+    }
+  </div>
+
+  <div class="auction-view">
+    @switch (view) { @case ('bid') {
+    <div class="bid-info">
+      @if (auction.bids.length > 0) { @for (bid of auction.bids; track bid.id) {
+      <div class="bid-user">
+        <div>
+          <h2>
+            {{ bid.username }}
+          </h2>
+        </div>
+        <div>${{ bid.bidAmount }}</div>
+      </div>
+
+      } }
+      <div class="bid-form">
+        <div>
+          <h2>Make a bid: {{ auction.product.name }}</h2>
+        </div>
+        <div>
+          <form #bidForm="ngForm" (ngSubmit)="submitBid($event, bidForm)">
+            <div>
+              <label for="auctionId">Auction id: {{ auction.id }}</label>
+            </div>
+            <div>
+              <label for="price">bid price:</label>
+            </div>
+            <div>
+              <input
+                type="number"
+                name="bidAmount"
+                placeholder="$100"
+                [(ngModel)]="bid.bidAmount"
+              />
+            </div>
+            <button>submit</button>
+          </form>
+        </div>
+      </div>
     </div>
 
-    <div class="auction-view">
-        @switch (view) {
+    } @case ('comment') {
+        @if(auction.comments.length > 0){
 
-        @case ('bid') {
-        <div class="bid-info">
-            @if (auction.bids.length > 0) {
-                @for (bid of auction.bids; track bid) {
-                            <div class="bid-user">
-
-                    <div>
-                    {{bid.username}}
-                </div>
-                <div>
-                    {{bid.bidAmount}}
-                </div>
-                            </div>
-
-                }
-
-            }
+        @for (comment of auction.comments; track $index) {
+            <div>
+                <h2>
+                {{comment.username}}</h2>
+            </div>
+            <div>
+                {{comment.comment}}
+            </div>
+        }
+    }
+<div class="bid-form">
+        <div>
+          <h2>Have a question?</h2>
         </div>
-        
-        }
+        <div>
+          <form #commentForm="ngForm" (ngSubmit)="submitComment($event, commentForm)">
+            <div>
+              <label for="auctionId">Auction id: {{ auction.id }}</label>
+            </div>
+            <div>
+              <label for="comment">comment</label>
+            </div>
+            <div>
+              <input
+                type="text"
+                name="comment"
+                placeholder="concerns?"
+                [(ngModel)]="comment.comment"
+              />
+            </div>
+            <button>submit</button>
+          </form>
+        </div>
+      </div>
+    
 
-        @case ('comment') {
-        }
 
-        @default {
-        }
-        }
+    }
+    
+    @default { } 
 
-    </div>
+}
+  </div>
 </div>

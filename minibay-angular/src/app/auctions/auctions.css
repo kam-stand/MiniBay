@@ -1,117 +1,160 @@
 .auction-container {
-    display: flex;
-    gap: 20px;
-    margin: 10px;
-    align-items: baseline;
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* left list, right detail */
+  gap: 20px;
+  padding: 20px;
+  height: 100vh;
+  background: #f5f7fa;
+  box-sizing: border-box;
 }
-/* Color palette:
-   #bfe2e3  (lightest)
-   #b4d2d8
-   #95a7b8
-   #7f9fbd
-   #69869c  (darkest)
-*/
 
-.auction-list{
-    overflow-y: scroll; /* Vertical scroll */
-    width: 300px;
-
-    height: 900px;
-            margin: 20px;
-            padding: 10px;
-
-      /* For Firefox */
-  scrollbar-width: thin;
-  scrollbar-color: #7f9fbd #bfe2e3; /* thumb | track */
-
-
+/* Auction List */
+.auction-list {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 15px;
+  overflow-y: auto;
 }
 
 .auction-info {
-    border: 2px solid #69869c;
-    margin: 5px;
-    border-radius: 10px;
-    padding: 5px;
-
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  background: #fafbfd;
+  border: 1px solid #e2e6eb;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
 }
 
 .auction-info:hover {
-    background-color: #bfe2e3;
-    border: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
+.auction-info mat-icon {
+  vertical-align: middle;
+  margin-right: 6px;
+  color: #69869c;
+}
 
-.auction-info ul {
+.auction-info > div {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #34495e;
+}
+
+/* Category List */
+.category ul {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 6px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
-.auction-info li {
-  margin: 0;
-  padding: 0;
-}
-
-.category {
-    display: flex;
-}
 .category li {
-    border-radius: 10px;
-    margin: 2px;
-    padding: 5px;
+  background: #bfe2e3;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #2c3e50;
 }
 
-.category li:hover {
-    border-radius: 10px;
-    margin: 2px;
-    padding: 5px;
-    background-color: gray;
-    color: white;
-    cursor: pointer;
-}
-
-.comment:hover {
-    border-radius: 10px;
-    margin: 2px;
-    padding: 5px;
-    background-color: gray;
-    color: white;
-    cursor: pointer;
-    
-}
-
-.bid:hover  {
-    border-radius: 10px;
-    margin: 2px;
-    padding: 5px;
-    background-color: gray;
-    color: white;
-    cursor: pointer;
-    
-}
-
+/* Right panel */
 .auction-view {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  overflow-y: auto;
 }
 
-.bid-info  {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 10px;
-    padding: auto;
-    flex-direction: column;
+.bid-info,
+.comment-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.bid-user{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 10px;
-    border: 1px solid black;
-    margin: 5px;
-    padding: 10px;
+/* Bid and Comment User Cards */
+.bid-user,
+.comment-user {
+  padding: 12px 15px;
+  background: #f9fbfd;
+  border-radius: 12px;
+  border: 1px solid #e2e6eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bid-user h2,
+.comment-user h2 {
+  margin: 0;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+.bid-user div:last-child,
+.comment-user div:last-child {
+  font-weight: bold;
+  color: #16a085;
+}
+
+/* Forms */
+.bid-form,
+.comment-form {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #f5f7fa;
+  border: 1px solid #e2e6eb;
+}
+
+.bid-form h2,
+.comment-form h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #2c3e50;
+}
+
+.bid-form label,
+.comment-form label {
+  font-size: 13px;
+  color: #555;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.bid-form input,
+.comment-form input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border: 1px solid #dcdfe3;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.bid-form button,
+.comment-form button {
+  background: #7f9fbd;
+  color: #fff;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.bid-form button:hover,
+.comment-form button:hover {
+  background: #69869c;
 }

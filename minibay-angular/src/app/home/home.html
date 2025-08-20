@@ -32,7 +32,7 @@
 </div>
 <div class="sell-container">
   <div class="form">
-    <form (submit)="submitProduct($event)">
+    <form #productForm="ngForm" (submit)="submitProduct($event, productForm)">
       <div>
         <label for="name">Name</label>
         <input

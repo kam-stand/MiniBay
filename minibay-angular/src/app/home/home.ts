@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Navbar } from '../navbar/navbar';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ProductService } from '../service/product-service';
 import { Product } from '../models/product';
@@ -28,7 +28,7 @@ export class Home {
     this.view = option;
   }
 
-  submitProduct(event: Event) {
+  submitProduct(event: Event, form: NgForm) {
     event.preventDefault();
     console.log("the product being posted: ", this.product)
     this.product.categories = this.product.splitCategories(this.categoriesText)
@@ -37,6 +37,7 @@ export class Home {
       {
         next: (response) => {
           console.log("Succes product uplaoded: ", response);
+          form.reset()
         },
         error: (err) => {
           console.log("Cannot upload product: ", err);
