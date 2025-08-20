@@ -1,0 +1,117 @@
+.auction-container {
+    display: flex;
+    gap: 20px;
+    margin: 10px;
+    align-items: baseline;
+}
+/* Color palette:
+   #bfe2e3  (lightest)
+   #b4d2d8
+   #95a7b8
+   #7f9fbd
+   #69869c  (darkest)
+*/
+
+.auction-list{
+    overflow-y: scroll; /* Vertical scroll */
+    width: 300px;
+
+    height: 900px;
+            margin: 20px;
+            padding: 10px;
+
+      /* For Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #7f9fbd #bfe2e3; /* thumb | track */
+
+
+}
+
+.auction-info {
+    border: 2px solid #69869c;
+    margin: 5px;
+    border-radius: 10px;
+    padding: 5px;
+
+}
+
+.auction-info:hover {
+    background-color: #bfe2e3;
+    border: transparent;
+}
+
+
+.auction-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.auction-info li {
+  margin: 0;
+  padding: 0;
+}
+
+.category {
+    display: flex;
+}
+.category li {
+    border-radius: 10px;
+    margin: 2px;
+    padding: 5px;
+}
+
+.category li:hover {
+    border-radius: 10px;
+    margin: 2px;
+    padding: 5px;
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+}
+
+.comment:hover {
+    border-radius: 10px;
+    margin: 2px;
+    padding: 5px;
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+    
+}
+
+.bid:hover  {
+    border-radius: 10px;
+    margin: 2px;
+    padding: 5px;
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+    
+}
+
+.auction-view {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.bid-info  {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px;
+    padding: auto;
+    flex-direction: column;
+}
+
+.bid-user{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid black;
+    margin: 5px;
+    padding: 10px;
+}

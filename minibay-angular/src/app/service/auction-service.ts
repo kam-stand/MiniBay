@@ -23,4 +23,9 @@ export class AuctionService {
   updateBid(id: string, bid: Bid): Observable<Auction> {
     return this.http.put<Auction>(`${this.AUCTION_URL}/${id}/bid`, bid);
   }
+
+  getAuctionById(id: string, auctionList: Auction[]): Auction | undefined {
+  return auctionList.find(a => a.id === id);
+}
+
 }
