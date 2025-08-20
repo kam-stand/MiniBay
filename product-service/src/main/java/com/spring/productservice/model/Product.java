@@ -12,6 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Document(collection = "product")
+@Getter
+@Setter
 public class Product {
 
     @Id
@@ -26,4 +28,6 @@ public class Product {
     private List<String> categories; // List of categories
 
     private double price;          // Product price
+
+    private boolean auction;
 }
