@@ -1,4 +1,4 @@
 package com.spring.productservice.model;
 
-public record Comment(String userId, String username, String comment) {
+public record Comment(long userId, String username, String comment) {
 }

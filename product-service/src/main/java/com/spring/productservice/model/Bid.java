@@ -1,4 +1,4 @@
 package com.spring.productservice.model;
 
-public record Bid(String userId, String username, double bidAmount) {
+public record Bid(long userId, String username, double bidAmount) {
 }
