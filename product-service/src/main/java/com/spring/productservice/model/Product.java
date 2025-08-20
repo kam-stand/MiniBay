@@ -30,4 +30,8 @@ public class Product {
     private double price;          // Product price
 
     private boolean auction;
+
+    private String review;
+
+    private int rating;
 }
