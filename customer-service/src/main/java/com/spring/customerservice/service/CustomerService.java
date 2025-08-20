@@ -58,11 +58,9 @@ public class CustomerService {
     }
 
     public CustomerResponse registerUser(CustomerRequest customerRequest) {
-        List<Customer> customers = customerRepository.findAll();
-        for (Customer customer: customers) {
-            if (customer.getEmail().equals(customerRequest.getEmail()) || customer.getUsername().equals(customerRequest.getUsername())) {
-                return null;
-            }
+        CustomerResponse customerResponse = getCustomerByUsername(customerRequest.getUsername());
+        if (customerResponse != null){
+            return null;
         }
         Customer customer = new Customer();
         customer.setEmail(customerRequest.getEmail());
@@ -70,11 +68,9 @@ public class CustomerService {
         customer.setPassword(customerRequest.getPassword());
         customer.setPhoneNumber(customerRequest.getPhoneNumber());
         save(customer);
-        CustomerResponse customerResponse = new CustomerResponse();
         customerResponse.setId(customer.getId());
         customerResponse.setEmail(customer.getEmail());
         customerResponse.setUsername(customer.getUsername());
-
         return customerResponse;
     }
 
