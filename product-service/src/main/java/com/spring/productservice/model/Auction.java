@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +27,9 @@ public class Auction {
 
     private double currentBid;
 
-    private List<Comments> comments;
+    private List<Comment> comments = new ArrayList<>();
+
+    private List<Bid> bids = new ArrayList<>();
 
     public Auction(Product product) {
         this.product = product;

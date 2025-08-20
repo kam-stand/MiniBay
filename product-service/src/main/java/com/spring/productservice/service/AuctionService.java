@@ -1,16 +1,17 @@
 package com.spring.productservice.service;
 
 import com.spring.productservice.model.Auction;
-import com.spring.productservice.model.Comments;
+import com.spring.productservice.model.Bid;
+import com.spring.productservice.model.Comment;
 import com.spring.productservice.repository.AuctionRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class AuctionService {
 
-    private AuctionRepository auctionRepository;
+    private final AuctionRepository auctionRepository;
 
     public AuctionService(AuctionRepository auctionRepository) {
         this.auctionRepository = auctionRepository;
@@ -24,12 +25,10 @@ public class AuctionService {
         return auctionRepository.findById(id).orElse(null);
     }
 
-    public Auction updateComment(String id, Comments comments) {
-        Auction bid = auctionRepository.findById(id).orElse(null);
+    public Auction updateComment(String id, Comment comment) {
+        Auction bid = getAuctionById(id);
         if (bid != null) {
-            List<Comments> commentsList = bid.getComments();
-            commentsList.add(comments);
-            bid.setComments(commentsList);
+            bid.getComments().add(comment);
             return auctionRepository.save(bid);
         }
         return null;
@@ -47,9 +46,24 @@ public class AuctionService {
         return auctionRepository.findAll().stream().filter(bid -> bid.getProduct().getId().equals(productId)).findFirst().orElse(null);
     }
 
-    public List<Auction> getBidsByUserId(String userId) {
+    public List<Auction> getAuctionByUserId(String userId) {
         return auctionRepository.findAll().stream().filter(bid -> bid.getProduct().getUserId() == Integer.parseInt(userId)).toList();
     }
+
+    public Auction updateBid(String auctionId, Bid bid){
+        Auction auction = getAuctionById(auctionId);
+        if (auction != null) {
+            auction.getBids().add(bid);
+            // set the auction amount to the max bid amt
+            Optional<Bid> currentMax = auction.getBids().stream().max(Comparator.comparingDouble(Bid::bidAmount));
+            currentMax.ifPresent(value -> auction.setCurrentBid(value.bidAmount()));
+
+            return auctionRepository.save(auction);
+        }
+        return null;
+    }
+
+
 
 
 }
