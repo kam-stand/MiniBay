@@ -41,37 +41,40 @@ public class CustomerService {
                 .toList();
     }
 
-    public CustomerResponse getCustomerByUsername(String username) {
-        Customer customer = customerRepository.findAll().stream().filter(cust -> cust.getUsername().equals(username)).findFirst().orElse(null);
+    public Customer getCustomerByUsername(String username) {
+        Customer customer = customerRepository
+                            .findAll()
+                .stream()
+                .filter(cust -> cust.getUsername().equals(username))
+                .findFirst()
+                .orElse(null);
         if (customer == null) {
             return null;
         }
-        return  new CustomerResponse(customer.getId(), customer.getEmail(), customer.getUsername());
+
+        return customer;
+
     }
 
     public CustomerResponse loginUser(CustomerLogin customerLogin) {
-        CustomerResponse response = getCustomerByUsername(customerLogin.username());
-        if (response != null){
-            return response;
+
+        // check if username exits if so check password
+        Customer customer = getCustomerByUsername(customerLogin.username());
+        if (customer != null && customer.getPassword().equals(customerLogin.password())) {
+            return new CustomerResponse(customer.getId(), customer.getEmail(), customer.getUsername());
         }
+
         return null;
     }
 
     public CustomerResponse registerUser(CustomerRequest customerRequest) {
-        CustomerResponse customerResponse = getCustomerByUsername(customerRequest.getUsername());
-        if (customerResponse != null){
-            return null;
+        // check if username exists
+        Customer customer = getCustomerByUsername(customerRequest.getUsername());
+        if (customer == null) {
+            Customer customer1 = new Customer(customerRequest.getEmail(), customerRequest.getPhoneNumber(), customerRequest.getUsername(), customerRequest.getPassword());
+            return new CustomerResponse(customerRepository.save(customer1).getId(), customer1.getEmail(), customer1.getUsername());
         }
-        Customer customer = new Customer();
-        customer.setEmail(customerRequest.getEmail());
-        customer.setUsername(customerRequest.getUsername());
-        customer.setPassword(customerRequest.getPassword());
-        customer.setPhoneNumber(customerRequest.getPhoneNumber());
-        save(customer);
-        customerResponse.setId(customer.getId());
-        customerResponse.setEmail(customer.getEmail());
-        customerResponse.setUsername(customer.getUsername());
-        return customerResponse;
+        return null;
     }
 
 }
