@@ -41,16 +41,18 @@ public class CustomerService {
                 .toList();
     }
 
+    public CustomerResponse getCustomerByUsername(String username) {
+        Customer customer = customerRepository.findAll().stream().filter(cust -> cust.getUsername().equals(username)).findFirst().orElse(null);
+        if (customer == null) {
+            return null;
+        }
+        return  new CustomerResponse(customer.getId(), customer.getEmail(), customer.getUsername());
+    }
+
     public CustomerResponse loginUser(CustomerLogin customerLogin) {
-        List<Customer> customers = customerRepository.findAll();
-        for (Customer customer : customers) {
-            if (customer.getUsername().equals(customerLogin.username()) && customer.getPassword().equals(customerLogin.password())) {
-                CustomerResponse customerResponse = new CustomerResponse();
-                customerResponse.setId(customer.getId());
-                customerResponse.setEmail(customer.getEmail());
-                customerResponse.setUsername(customer.getUsername());
-                return customerResponse;
-            }
+        CustomerResponse response = getCustomerByUsername(customerLogin.username());
+        if (response != null){
+            return response;
         }
         return null;
     }
