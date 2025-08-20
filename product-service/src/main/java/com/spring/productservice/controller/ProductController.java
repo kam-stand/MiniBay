@@ -1,6 +1,7 @@
 package com.spring.productservice.controller;
 
 import com.spring.productservice.model.Product;
+import com.spring.productservice.model.Review;
 import com.spring.productservice.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,13 +31,20 @@ public class ProductController {
         return ResponseEntity.ok(productService.saveProduct(product));
     }
 
-    @PutMapping("")
-    public ResponseEntity<?> updateProduct(@RequestBody Product product){
-        return ResponseEntity.ok(productService.updateProduct(product));
+    @PutMapping("{id}")
+    public ResponseEntity<?> updateProduct(@PathVariable String id, @RequestBody Product product){
+        return ResponseEntity.ok(productService.updateProduct(id, product));
     }
 
     @DeleteMapping("{id}")
     public void deleteProductById(@PathVariable String id){
         productService.deleteProductById(id);
     }
+
+    @PutMapping("{id}/review")
+    public ResponseEntity<?> addReview(@PathVariable String id, @RequestBody Review review){
+        return ResponseEntity.ok(productService.addReview(id, review));
+    }
+
+
 }

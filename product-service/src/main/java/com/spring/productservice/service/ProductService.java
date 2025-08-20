@@ -2,6 +2,7 @@ package com.spring.productservice.service;
 
 import com.spring.productservice.model.Auction;
 import com.spring.productservice.model.Product;
+import com.spring.productservice.model.Review;
 import com.spring.productservice.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +41,28 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public Product updateProduct(Product product) {
-        return productRepository.save(product);
+    public Product updateProduct(String id, Product product) {
+        Product productToUpdate = getProductById(id);
+        if (productToUpdate != null) {
+            productToUpdate.setName(product.getName());
+            product.setUserId(productToUpdate.getUserId());
+            productToUpdate.setBrand(product.getBrand());
+            productToUpdate.setCategories(product.getCategories());
+            productToUpdate.setPrice(product.getPrice());
+            productToUpdate.setAuction(product.isAuction());
+            productToUpdate.setReview(product.getReview());
+            productToUpdate.setRating(product.getRating());
+            return productRepository.save(productToUpdate);
+        }
+        return null;
+    }
+
+    public Product addReview(String id, Review review) {
+        Product product = getProductById(id);
+        if (product != null) {
+            product.getReviews().add(review);
+            return productRepository.save(product);
+        }
+        return null;
     }
 }
