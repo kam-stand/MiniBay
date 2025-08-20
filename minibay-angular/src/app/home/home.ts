@@ -5,10 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ProductService } from '../service/product-service';
 import { Product } from '../models/product';
+import { Auctions } from '../auctions/auctions';
 
 @Component({
   selector: 'app-home',
-  imports: [Navbar, MatIconModule, FormsModule],
+  imports: [Navbar, MatIconModule, FormsModule, Auctions],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

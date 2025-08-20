@@ -1,0 +1,25 @@
+<div>
+    @for (auction of auctionList; track auction) {
+        <div>
+            <h1>{{auction.id}}</h1>
+        </div>
+        <div>
+            {{auction.product.name}}
+        </div>
+        <div>
+            {{auction.product.brand}}
+        </div>
+        <div>
+            {{auction.currentBid}}
+        </div>
+        <div>
+            {{auction.bids}}
+        </div>
+        <div>
+            {{auction.comments}}
+        </div>
+        <div>
+            {{auction.product.categories}}
+        </div>
+    }
+</div>

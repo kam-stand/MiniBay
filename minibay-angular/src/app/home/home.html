@@ -15,67 +15,81 @@
     <mat-icon class="icon">moving</mat-icon>
     <h1>Trending</h1>
   </div>
-
 </div>
 
+@switch (view) { @case ("bid") {
+<app-auctions></app-auctions>
 
-@switch (view) {
-
-@case ("bid") {
-<h1>bid view</h1>
-
-}
-
-@case ("trend") {
+} @case ("trend") {
 <h1>trend view</h1>
-}
+} @case ("sell") {
 
-@case ("sell") {
-
-    <div class="info">
+<div class="info">
+  <div>
+    <mat-icon class="icon">store</mat-icon>
+  </div>
+  <p>Please list the product you with sell with info belo</p>
+</div>
+<div class="sell-container">
+  <div class="form">
+    <form (submit)="submitProduct($event)">
       <div>
-          <mat-icon class="icon">store</mat-icon>
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="product.name"
+          placeholder="Apple Watch"
+        />
       </div>
-      <p>Please list the product you with sell with info belo</p>
-    </div>
-  <div class="sell-container">
 
-    <div class="form">
-      <form (submit)="submitProduct($event)">
-        <div>
+      <div>
+        <label for="name">Brand</label>
+        <input
+          type="text"
+          id="brand"
+          name="brand"
+          [(ngModel)]="product.brand"
+          placeholder="Apple"
+        />
+      </div>
 
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" [(ngModel)]="product.name" placeholder="Apple Watch">
-        </div>
-        
-        <div>
-      <label for="name">Brand</label>
-      <input type="text" id="brand" name="brand" [(ngModel)]="product.brand" placeholder="Apple">
-        </div>
-        
-        <div>
-      <label for="name">Categories (seperate by space)</label>
-      <input type="text" id="categories" name="categories" [(ngModel)]="categoriesText" placeholder="eg. Tech Fashion Wearables">
-        </div>
-        
+      <div>
+        <label for="name">Categories (seperate by space)</label>
+        <input
+          type="text"
+          id="categories"
+          name="categories"
+          [(ngModel)]="categoriesText"
+          placeholder="eg. Tech Fashion Wearables"
+        />
+      </div>
 
-        <div>
-      <label for="name">Price</label>
-      <input type="number" id="price" name="price" [(ngModel)]="product.price" placeholder="$1200">
-        </div>
-          <div class="info">
-    <button>
-    <mat-icon class="icon">publish</mat-icon>
-    </button>
+      <div>
+        <label for="price">Price</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          [(ngModel)]="product.price"
+          placeholder="$1200"
+        />
+      </div>
+      <div>
+        <label for="auction">Auction?</label>
+        <input type="checkbox" id="auction" name="auction" [(ngModel)]="product.auction" />
+      </div>
+
+      <div class="info">
+        <button>
+          <mat-icon class="icon">publish</mat-icon>
+        </button>
+      </div>
+    </form>
   </div>
+</div>
 
-      </form>
-    </div>
-  </div>
-
-}
-
-@default {
+} @default {
 <p>nothing to see here</p>
-}
-}
+} }
