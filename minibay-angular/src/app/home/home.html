@@ -31,35 +31,48 @@
 }
 
 @case ("sell") {
-<div class="sell-container">
-  <form (submit)="submitProduct($event)">
-    <div class="product-field">
-      <label for="fname">Name</label><br>
-      <input type="text" id="fname" name="fname" [(ngModel)]="product.name" placeholder="Smart Watch"><br>
+
+    <div class="info">
+      <div>
+          <mat-icon class="icon">store</mat-icon>
+      </div>
+      <p>Please list the product you with sell with info belo</p>
     </div>
+  <div class="sell-container">
 
-    <div class="product-field">
-      <label for="lname">Brand</label><br>
-      <input type="text" id="lname" name="lname" [(ngModel)]="product.brand" placeholder="Apple"><br>
+    <div class="form">
+      <form (submit)="submitProduct($event)">
+        <div>
+
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" [(ngModel)]="product.name" placeholder="Apple Watch">
+        </div>
+        
+        <div>
+      <label for="name">Brand</label>
+      <input type="text" id="brand" name="brand" [(ngModel)]="product.brand" placeholder="Apple">
+        </div>
+        
+        <div>
+      <label for="name">Categories (seperate by space)</label>
+      <input type="text" id="categories" name="categories" [(ngModel)]="categoriesText" placeholder="eg. Tech Fashion Wearables">
+        </div>
+        
+
+        <div>
+      <label for="name">Price</label>
+      <input type="number" id="price" name="price" [(ngModel)]="product.price" placeholder="$1200">
+        </div>
+          <div class="info">
+    <button>
+    <mat-icon class="icon">publish</mat-icon>
+    </button>
+  </div>
+
+      </form>
     </div>
+  </div>
 
-        <div class="product-field">
-      <label for="categories">Categories (separate by spaces)</label><br>
-      <input type="text" id="categories" name="categories" [(ngModel)]="categoriesText" placeholder="e.g. Tech"><br>
-    </div>
-
-
-    <div class="product-field">
-      <label for="price">Price</label><br>
-      <input type="number" id="price" name="price" min="0.01" step="0.01" [(ngModel)]="product.price" placeholder="0.00"><br>
-    </div>
-
-    <div>
-      <button>create</button>
-    </div>
-
-  </form>
-</div>
 }
 
 @default {

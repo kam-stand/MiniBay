@@ -3,14 +3,8 @@ import { Navbar } from '../navbar/navbar';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment.development';
-interface Product {
-  userId: number;
-  name: string;
-  brand: string;
-  categories: string[];
-  price: number;
-}
+import { ProductService } from '../service/product-service';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-home',
@@ -21,17 +15,12 @@ interface Product {
 export class Home {
   view: string = 'sell';
 
-  product: Product = {
-    userId: 0,
-    name: '',
-    brand: '',
-    categories: [],
-    price: 0,
-  };
 
   categoriesText ="";
 
-  constructor(private http: HttpClient) {}
+  product: Product = new Product();
+
+  constructor(private http: HttpClient, private productService: ProductService) {}
 
   handleView(option: string): void {
     console.log('the view is now: ', option);
@@ -40,26 +29,19 @@ export class Home {
 
   submitProduct(event: Event) {
     event.preventDefault();
+    console.log("the product being posted: ", this.product)
+    this.product.categories = this.product.splitCategories(this.categoriesText)
 
-    // Get customer from localStorage
-    const customerJson = localStorage.getItem('customer');
-    if (!customerJson) return;
-
-    const customer = JSON.parse(customerJson);
-    this.product.userId = customer.id; // lowercase 'id'
-
-    console.log('Sending product:', this.product);
-
-    // Split categoriesText by spaces into an array
-    this.product.categories = this.categoriesText.trim().split(/\s+/);
-
-    console.log('Sending product:', this.product);
-
-    const PRODUCT_URL = environment.API_GATEWAY_URL + '/products';
-    this.http.post<Product>(PRODUCT_URL, this.product).subscribe({
-      next: (response) => console.log('Product created successfully:', response),
-      error: (err) => console.error('Error creating product:', err),
-    });
-  
+    this.productService.postProduct(this.product).subscribe(
+      {
+        next: (response) => {
+          console.log("Succes product uplaoded: ", response);
+        },
+        error: (err) => {
+          console.log("Cannot upload product: ", err);
+        }
+      }
+    )
+    
   }
 }

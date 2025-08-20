@@ -77,3 +77,27 @@ input {
     border: 1px solid #95a7b8;
     background-color: #bfe2e3;
 }
+
+.info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.info p {
+  color: gray;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+}
+
+button:hover {
+  background-color: #69869c;
+  color: #95a7b8;
+  border-radius: 12px;
+  border: 7px solid white;
+  cursor: pointer;
+}
