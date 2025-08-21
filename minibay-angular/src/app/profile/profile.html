@@ -1,1 +1,69 @@
 <app-navbar></app-navbar>
+
+<div class="tabs">
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab label="Info">Info</mat-tab>
+
+    <mat-tab label="Auction">
+      <table mat-table [dataSource]="auctionList" class="mat-elevation-z8">
+        <!-- Auction ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Auction ID</th>
+          <td mat-cell *matCellDef="let auction">{{ auction.id }}</td>
+        </ng-container>
+
+        <!-- Product Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Product Name</th>
+          <td mat-cell *matCellDef="let auction">{{ auction.product.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef>Price</th>
+            <td mat-cell *matCellDef="let auction">${{ auction.product.price }}</td>
+
+        </ng-container>
+
+        <!-- Current Bid Column -->
+        <ng-container matColumnDef="currentBid">
+          <th mat-header-cell *matHeaderCellDef>Current Bid</th>
+          <td mat-cell *matCellDef="let auction">${{ auction.currentBid }}</td>
+        </ng-container>
+
+        <!-- Delete Button Column -->
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef>Delete</th>
+          <td mat-cell *matCellDef="let auction">
+            <button matButton (click)="onDelete(auction)">Delete</button>
+          </td>
+        </ng-container>
+
+        <!-- Accept Toggle Column -->
+        <ng-container matColumnDef="accept">
+          <th mat-header-cell *matHeaderCellDef>Accept</th>
+          <td mat-cell *matCellDef="let auction">
+            <p>
+              Accept Offer?
+              <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                <mat-button-toggle
+                  value="bold"
+                  (click)="onAcceptToggle(auction, $event)"
+                  >accept</mat-button-toggle
+                >
+                <mat-button-toggle value="italic" (click)="onDelete(auction)"
+                  >decline</mat-button-toggle
+                >
+              </mat-button-toggle-group>
+            </p>
+          </td>
+        </ng-container>
+
+        <!-- Header and Row definitions -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-tab>
+
+    <mat-tab label="Products">products</mat-tab>
+  </mat-tab-group>
+</div>

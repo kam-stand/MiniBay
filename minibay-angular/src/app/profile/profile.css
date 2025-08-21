@@ -1,0 +1,81 @@
+.mat-tab-group {
+  margin-bottom: 48px;
+  color: gray;
+}
+
+/* 
+    #bfe2e3 	(191,226,227)
+	#b4d2d8 	(180,210,216)
+	#95a7b8 	(149,167,184)
+	#7f9fbd 	(127,159,189)
+	#69869c 	(105,134,156)
+*/
+/* Tabs container */
+.tabs {
+  margin: 20px;
+}
+
+/* Table container */
+table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+/* Header row */
+th.mat-header-cell {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+  padding: 12px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Data rows */
+td.mat-cell {
+  padding: 12px;
+  font-size: 14px;
+  color: #444;
+  border-bottom: 1px solid #eee;
+}
+
+/* Hover effect for rows */
+tr.mat-row:hover {
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+/* Delete button style */
+button[matButton] {
+  background-color: #f44336;
+  color: white;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 4px 10px;
+  transition: background 0.3s ease;
+}
+
+button[matButton]:hover {
+  background-color: #d32f2f;
+}
+
+/* Toggle button group */
+mat-button-toggle-group {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+mat-button-toggle {
+  font-size: 13px;
+  text-transform: capitalize;
+  padding: 4px 12px;
+}
+
+mat-button-toggle.mat-button-toggle-checked {
+  background-color: #1976d2;
+  color: white;
+}

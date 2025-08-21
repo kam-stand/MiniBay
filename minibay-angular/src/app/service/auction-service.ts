@@ -46,4 +46,15 @@ export class AuctionService {
   return auctionList.find(a => a.id === id);
 }
 
+  getAuctionByUserId() : Observable<Auction[]> {
+    let userId = 0;
+    const customerJson = localStorage.getItem("customer");
+    if (customerJson){
+      const customer = JSON.parse(customerJson)
+      userId = customer.id;
+    }
+
+    return this.http.get<Auction[]>(`${this.AUCTION_URL}/by-user/${userId}`);
+  }
+
 }
