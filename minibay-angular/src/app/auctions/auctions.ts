@@ -3,10 +3,8 @@ import { AuctionService } from '../service/auction-service';
 import { Auction } from '../models/auction';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, NgForm } from "@angular/forms";
-import { NgFor } from '@angular/common';
 import { Bid } from '../models/bid';
 import { Comment } from '../models/comment';
-import { from } from 'rxjs';
 
 @Component({
   selector: 'app-auctions',
@@ -34,16 +32,26 @@ export class Auctions {
   constructor (private auctionService: AuctionService) {}
 
   ngOnInit() : void {
-    this.auctionService.getAuctions().subscribe ({
-      next: (auctions: Auction[]) => {
-        console.log("We got auctions ", auctions);
-        this.auctionList = auctions;
-      },
-      error: (err) => {
-        console.log("Error getting auctions ", err)
-      }
-    })
+    this.loadAuctions();
+
+    setInterval(() => {
+      this.loadAuctions();
+
+    }, 5000)
   }
+
+  loadAuctions() {
+  this.auctionService.getAuctions().subscribe({
+    next: (auctions: Auction[]) => {
+      this.auctionList = auctions;
+      if (this.auction) {
+        this.auction = this.auctionList.find(a => a.id === this.auction.id)!;
+      }
+    },
+    error: (err) => console.error("Error getting auctions", err)
+  });
+}
+
 
   view : string = ''
 
