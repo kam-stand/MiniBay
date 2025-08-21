@@ -32,9 +32,10 @@ public class Product {
 
     private boolean auction;
 
-    private String review;
+    private int averageRating;
 
-    private int rating;
+    private String description;
 
     private List<Review> reviews = new ArrayList<>();
+
 }

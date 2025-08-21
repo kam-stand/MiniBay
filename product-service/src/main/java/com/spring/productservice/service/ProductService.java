@@ -50,8 +50,8 @@ public class ProductService {
             productToUpdate.setCategories(product.getCategories());
             productToUpdate.setPrice(product.getPrice());
             productToUpdate.setAuction(product.isAuction());
-            productToUpdate.setReview(product.getReview());
-            productToUpdate.setRating(product.getRating());
+            productToUpdate.setReviews(product.getReviews());
+            productToUpdate.setAverageRating(product.getAverageRating());
             return productRepository.save(productToUpdate);
         }
         return null;
@@ -59,10 +59,9 @@ public class ProductService {
 
     public Product addReview(String id, Review review) {
         Product product = getProductById(id);
-        if (product != null) {
-            product.getReviews().add(review);
-            return productRepository.save(product);
-        }
-        return null;
+        int rating =(int)product.getReviews().stream().mapToDouble(Review::rating).average().orElse(0);
+        product.setAverageRating(rating);
+        product.getReviews().add(review);
+        return productRepository.save(product);
     }
 }
