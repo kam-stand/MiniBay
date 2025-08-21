@@ -31,5 +31,15 @@ export class ProductService {
     return this.http.get<Product[]>(this.PRODUCT_URL);
   }
 
+  getProductByUserId(): Observable<Product[]> {
+    let userId = 0;
+    const customerJson = localStorage.getItem("customer");
+    if (customerJson){
+      const customer = JSON.parse(customerJson)
+      userId = customer.id;
+    }
+    return this.http.get<Product[]>(`${this.PRODUCT_URL}/user/${userId}`);
+  }
+
   
 }

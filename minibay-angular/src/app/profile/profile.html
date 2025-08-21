@@ -2,14 +2,15 @@
 
 <div class="tabs">
   <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-    <mat-tab label="Info">
 
+    <!-- Info tab -->
+    <mat-tab label="Info">
       <mat-card class="example-card" appearance="outlined">
   <mat-card-header>
-    <mat-card-title>{{email}}</mat-card-title>
+    <mat-card-title>{{username}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <p>{{username}}</p>
+    <p>{{email}}</p>
   </mat-card-content>
   <mat-card-footer class="example-card-footer">
     <mat-chip-set aria-label="Chihuahua traits">
@@ -20,69 +21,115 @@
   </mat-card-footer>
 </mat-card>
 
-
     </mat-tab>
 
+    <!-- Auctions tab -->
     <mat-tab label="Auction">
       <table mat-table [dataSource]="auctionList" class="mat-elevation-z8">
-        <!-- Auction ID Column -->
+
+        <!-- Auction ID -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>Auction ID</th>
           <td mat-cell *matCellDef="let auction">{{ auction.id }}</td>
         </ng-container>
 
-        <!-- Product Name Column -->
+        <!-- Product Name -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Product Name</th>
           <td mat-cell *matCellDef="let auction">{{ auction.product.name }}</td>
         </ng-container>
 
+        <!-- Price -->
         <ng-container matColumnDef="price">
-            <th mat-header-cell *matHeaderCellDef>Price</th>
-            <td mat-cell *matCellDef="let auction">${{ auction.product.price }}</td>
-
+          <th mat-header-cell *matHeaderCellDef>Price</th>
+          <td mat-cell *matCellDef="let auction">${{ auction.product.price }}</td>
         </ng-container>
 
-        <!-- Current Bid Column -->
+        <!-- Current Bid -->
         <ng-container matColumnDef="currentBid">
           <th mat-header-cell *matHeaderCellDef>Current Bid</th>
           <td mat-cell *matCellDef="let auction">${{ auction.currentBid }}</td>
         </ng-container>
 
-        <!-- Delete Button Column -->
+        <!-- Delete -->
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef>Delete</th>
           <td mat-cell *matCellDef="let auction">
-            <button matButton (click)="onDelete(auction)">Delete</button>
+            <button mat-button color="warn" (click)="onDeleteAuction(auction)">Delete</button>
           </td>
         </ng-container>
 
-        <!-- Accept Toggle Column -->
+        <!-- Accept -->
         <ng-container matColumnDef="accept">
           <th mat-header-cell *matHeaderCellDef>Accept</th>
           <td mat-cell *matCellDef="let auction">
-            <p>
-              Accept Offer?
-              <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                <mat-button-toggle
-                  value="bold"
-                  (click)="onAcceptToggle(auction, $event)"
-                  >accept</mat-button-toggle
-                >
-                <mat-button-toggle value="italic" (click)="onDelete(auction)"
-                  >decline</mat-button-toggle
-                >
-              </mat-button-toggle-group>
-            </p>
+            <mat-slide-toggle (change)="onAcceptAuction(auction, $event)"></mat-slide-toggle>
           </td>
         </ng-container>
 
-        <!-- Header and Row definitions -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </mat-tab>
 
-    <mat-tab label="Products">products</mat-tab>
+    <!-- Products tab -->
+    <mat-tab label="Products">
+      <table mat-table [dataSource]="productList" class="mat-elevation-z8">
+
+        <!-- Name -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let product">{{ product.name }}</td>
+        </ng-container>
+
+        <!-- Price -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Price</th>
+          <td mat-cell *matCellDef="let product">${{ product.price }}</td>
+        </ng-container>
+
+        <!-- Brand -->
+        <ng-container matColumnDef="brand">
+          <th mat-header-cell *matHeaderCellDef>Brand</th>
+          <td mat-cell *matCellDef="let product">{{ product.brand }}</td>
+        </ng-container>
+
+        <!-- Average Rating -->
+        <ng-container matColumnDef="averageRating">
+          <th mat-header-cell *matHeaderCellDef>Rating</th>
+          <td mat-cell *matCellDef="let product">{{ product.averageRating }}</td>
+        </ng-container>
+
+        <!-- Delete -->
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef>Delete</th>
+          <td mat-cell *matCellDef="let product">
+            <button mat-button color="warn" (click)="onDeleteProduct(product)">Delete</button>
+          </td>
+        </ng-container>
+
+        <!-- Accept -->
+        <ng-container matColumnDef="accept">
+          <th mat-header-cell *matHeaderCellDef>Accept</th>
+          <td mat-cell *matCellDef="let product">
+            <mat-slide-toggle (change)="onAcceptProduct(product, $event)"></mat-slide-toggle>
+          </td>
+        </ng-container>
+
+        <!-- Reviews -->
+        <ng-container matColumnDef="reviews">
+          <th mat-header-cell *matHeaderCellDef>Reviews</th>
+          <td mat-cell *matCellDef="let product">
+            <span *ngFor="let review of product.reviews; let i = index">
+              {{ review.comment }}<span *ngIf="i < product.reviews.length - 1">, </span>
+            </span>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="productColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: productColumns;"></tr>
+      </table>
+    </mat-tab>
+
   </mat-tab-group>
 </div>
