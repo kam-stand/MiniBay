@@ -64,4 +64,12 @@ public class ProductService {
         product.getReviews().add(review);
         return productRepository.save(product);
     }
+
+    public List<Product> getProductByUserId(long userId){
+        return productRepository.findAll()
+                .stream()
+                .filter(product -> product.getUserId() == userId)
+                .toList();
+
+    }
 }

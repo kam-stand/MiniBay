@@ -46,5 +46,10 @@ public class ProductController {
         return ResponseEntity.ok(productService.addReview(id, review));
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getProductByUserId(@PathVariable long userId){
+        return ResponseEntity.ok(productService.getProductByUserId(userId));
+    }
+
 
 }
