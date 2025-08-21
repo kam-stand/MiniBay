@@ -1,0 +1,73 @@
+<div class="product-container">
+  @for (p of productList; track $index) {
+  <mat-divider></mat-divider>
+
+  <h2>{{ p.name }}</h2>
+  <div>{{ p.brand }}</div>
+
+
+
+  @if (p.categories.length > 0) {
+  <mat-list>
+    @for (c of p.categories; track $index) {
+    <mat-list-item>
+      <mat-icon matListItemIcon>label</mat-icon>
+      <span>{{ c }}</span>
+    </mat-list-item>
+    }
+  </mat-list>
+  }
+
+  <div class="price-review">
+    <div class="price">
+      <mat-icon>payment</mat-icon>
+      <div>${{ p.price }}</div>
+    </div>
+    <div class="review">
+      <mat-icon>reviews</mat-icon>
+      <div>
+        {{ p.reviews.length }}
+      </div>
+<mat-accordion>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Reviews </mat-panel-title>
+      <mat-panel-description> Product review </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="review-container">
+      @if (p.reviews.length > 0) {
+        @for (r of p.reviews; track $index) {
+          <div class="review-item">
+            <p class="review-user">{{ r.username }}</p>
+            <p class="review-rating">⭐ {{ r.rating }}</p>
+            <p class="review-text">{{ r.review }}</p>
+          </div>
+          <mat-divider></mat-divider>
+        }
+      }
+    </div>
+    
+  </mat-expansion-panel>
+</mat-accordion>
+
+    </div>
+  </div>
+
+  <mat-accordion>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Description </mat-panel-title>
+      <mat-panel-description> Product details </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>{{p.description}}</p>
+  </mat-expansion-panel>
+</mat-accordion>
+<div>
+  <button mat-button>
+    Add to cart
+  </button>
+</div>
+  
+  }
+</div>

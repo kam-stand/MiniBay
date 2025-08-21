@@ -1,0 +1,146 @@
+.product-container {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* Product title */
+h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #69869c; /* darkest */
+}
+
+/* Brand text */
+.product-container > div {
+  font-size: 1rem;
+  color: #7f9fbd;
+}
+
+/* Categories list */
+mat-list {
+  background-color: #b4d2d8;
+  border-radius: 8px;
+  margin: 10px 0;
+  padding: 5px;
+}
+
+mat-list-item {
+  font-size: 0.95rem;
+  color: #69869c;
+}
+
+mat-icon[matListItemIcon] {
+  color: #95a7b8;
+  margin-right: 6px;
+}
+
+/* Price + Review section */
+.price-review {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #b4d2d8;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin: 10px 0;
+  color: #fff;
+}
+
+.price, .review {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: black;
+}
+
+.price mat-icon {
+  color: green;
+}
+
+.review mat-icon {
+  color: black;
+}
+
+/* Expansion panel */
+mat-expansion-panel {
+  background-color: #95a7b8;
+  color: white;
+  border-radius: 10px !important;
+  margin-top: 10px;
+}
+
+mat-expansion-panel-header {
+  color: white;
+}
+
+mat-expansion-panel p {
+  margin: 10px;
+  font-size: 0.95rem;
+  color: #f8f8f8;
+}
+
+/* Add to Cart button */
+button[mat-button] {
+  background-color: #7f9fbd;
+  color: white;
+  border-radius: 20px;
+  padding: 6px 16px;
+  margin-top: 12px;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button[mat-button]:hover {
+  background-color: #69869c;
+}
+
+
+/* Scrollable review section */
+.review-container {
+  max-height: 200px;       /* adjust height to what you like */
+  overflow-y: auto;        /* enable vertical scroll */
+  padding: 8px;
+  background-color: lightgray; /* lightest */
+  border-radius: 8px;
+}
+
+/* Individual review items */
+.review-item {
+  padding: 6px 4px;
+  color: black; /* darkest */
+}
+
+.review-user {
+  font-weight: bold;
+  margin: 0;
+  color: #7f9fbd;
+}
+
+.review-rating {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #95a7b8;
+}
+
+.review-text {
+  margin: 4px 0 8px 0;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* Optional: nicer scrollbars for WebKit browsers */
+.review-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.review-container::-webkit-scrollbar-thumb {
+  background-color: #95a7b8;
+  border-radius: 4px;
+}
+
+.review-container::-webkit-scrollbar-track {
+  background: #b4d2d8;
+}

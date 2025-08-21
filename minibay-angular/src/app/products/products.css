@@ -6,36 +6,3 @@
    #69869c  (darkest)
 */
 
-.products-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 16px;
-}
-
-.products-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px; /* space between cards */
-}
-
-.product-card {
-  flex: 1 1 200px; /* grow, shrink, basis */
-  border-radius: 8px;
-  padding: 12px;
-  background-color: #bfe2e3; /* lightest color */
-  color: #69869c; /* darkest color for text */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.2s;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  background-color: #b4d2d8; /* slightly darker on hover */
-}
-
-.product-emoji {
-  font-size: 40px;
-  margin-bottom: 8px;
-}

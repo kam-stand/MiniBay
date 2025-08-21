@@ -1,3 +1,5 @@
+import { Reviews } from "./reviews";
+
 export class Product {
 
 constructor(
@@ -6,7 +8,11 @@ constructor(
     public brand: string = '',
     public categories: string[] = [],
     public price: number = 0,
-    public auction: boolean = true
+    public auction: boolean = true,
+    public averageRating: number = 0,
+    public description: string = '',
+    public reviews: Reviews[] = []
+    
   ) {}
 
     splitCategories(categories: string): string[] {
